@@ -1,3 +1,5 @@
-"""FastAPI REST API endpoints."""
+"""FastAPI REST API for invoice processing."""
 
-# API endpoints will be implemented here
+from invoice_processor.api.main import app, create_app
+
+__all__ = ["app", "create_app"]

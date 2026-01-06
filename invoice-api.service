@@ -1,0 +1,23 @@
+[Unit]
+Description=Invoice Processor API
+After=network.target
+
+[Service]
+Type=simple
+User=dunkin
+Group=dunkin
+WorkingDirectory=/aidata/invoice-processor
+Environment="PATH=/aidata/invoice-processor/.venv/bin:/usr/local/bin:/usr/bin:/bin"
+Environment="OPENAI_API_KEY=dummy-key"
+ExecStart=/aidata/invoice-processor/.venv/bin/uvicorn invoice_processor.api.main:app --host 0.0.0.0 --port 8421
+Restart=always
+RestartSec=5
+
+# Security hardening
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/aidata/invoice-processor/data /tmp
+
+[Install]
+WantedBy=multi-user.target
